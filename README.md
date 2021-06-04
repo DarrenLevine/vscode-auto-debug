@@ -1,4 +1,4 @@
-# Auto Debug
+# <img src="images/auto_debug_icon.png" alt="drawing" width="50"/> Auto Debug extension for Visual Studio Code
 
 Automatically switches your debugger/launch configuration based on what file you have active. Enables automated language-aware debugging.
 

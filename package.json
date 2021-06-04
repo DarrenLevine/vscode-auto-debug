@@ -20,7 +20,7 @@
 	"engines": {
 		"vscode": "^1.56.0"
 	},
-	"icon": "images/auto-debug-icon.png",
+	"icon": "images/auto_debug_icon.png",
 	"categories": [
 		"Debuggers",
 		"Other"
