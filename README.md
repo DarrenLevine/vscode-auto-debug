@@ -12,7 +12,6 @@ Allows you to create a new "auto" debugger that maps glob patterns (which will m
     "type": "auto-debug",
     "request": "launch",
     "map": {
-        // these are defined by you. Glob patterns for your active file on the left, launch configuration name on the right
         "tests/*.py": "Python: Test Folder Debug",
         "*.py": "Python: Current File",
         "*.cpp": "g++.exe - Build and debug active file",
@@ -31,15 +30,15 @@ Note that in cases where multiple matches are found for your active file, the fi
 
 -   **Step 2.** Create an "Auto Debug" configuration.
 
-![create configuration](images\create_configuration.png)
+![create configuration](images/create_configuration.png)
 
 -   **Step 2.** Customize the "Auto Debug" configuration for your needs.
 
-![edit configuration](images\fill_out_configuration.png)
+![edit configuration](images/fill_out_configuration.png)
 
 -   **Step 3.** Ensure you have "auto" selected in vscode's "Run and Debug" menu.
 
-![edit configuration](images\select_auto.png)
+![edit configuration](images/select_auto.png)
 
 -   **Step 4.** Open a file you'd like to debug and press F5.
 

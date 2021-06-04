@@ -3,10 +3,11 @@
 	"displayName": "Auto Debug",
 	"description": "Automatically switches launch configuration based on a glob of your active file. Enabling context/language aware debugging.",
 	"version": "1.0.0",
-	"publisher": "DarrenVLevine",
+	"publisher": "DarrenLevine",
 	"author": {
 		"name": "Darren Levine",
-		"email": "DarrenVLevine@gmail.com"
+		"email": "DarrenVLevine@gmail.com",
+		"url": "https://github.com/DarrenLevine"
 	},
 	"license": "MIT",
 	"keywords": [
@@ -26,10 +27,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/?????.git"
+		"url": "https://github.com/DarrenLevine/vscode-auto-debug.git"
 	},
 	"bugs": {
-		"url": "https://github.com/?????/issues"
+		"url": "https://github.com/DarrenLevine/vscode-auto-debug/issues"
 	},
 	"activationEvents": [
 		"onCommand:auto-debug.auto-debug",

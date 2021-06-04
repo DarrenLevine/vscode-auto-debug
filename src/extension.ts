@@ -2,13 +2,13 @@ import * as vscode from 'vscode';
 import { WorkspaceFolder, DebugConfiguration, ProviderResult, CancellationToken } from 'vscode';
 var minimatch = require("minimatch");
 
-export function globLaunch(dictionaryOfGlobPatterns: object) {
+export function globLaunch(folder: WorkspaceFolder | undefined, dictionaryOfGlobPatterns: object) {
 	if (!vscode.window.activeTextEditor) {
 		vscode.window.showInformationMessage('no active file in text editor');
 		return;
 	}
-	if (!vscode.workspace.workspaceFolders) {
-		vscode.window.showInformationMessage('no active workspaceFolders (!vscode.workspace.workspaceFolders)');
+	if (!folder) {
+		vscode.window.showInformationMessage('no active workspaceFolders');
 		return;
 	}
 	var activeFilenameWithPath = vscode.window.activeTextEditor.document.fileName;
@@ -18,7 +18,7 @@ export function globLaunch(dictionaryOfGlobPatterns: object) {
 		var matchExists = minimatch(activeFilenameWithPath, globPattern, { matchBase: true });
 		if (matchExists) {
 			console.log(`matched "${activeFilenameWithPath}" using {"${globPattern}":"${launchTaskName}"}`);
-			vscode.debug.startDebugging(vscode.workspace.workspaceFolders[0], launchTaskName);
+			vscode.debug.startDebugging(folder, launchTaskName);
 			return;
 		}
 	}
@@ -30,7 +30,7 @@ class AutoDebugConfigurationProvider implements vscode.DebugConfigurationProvide
 	resolveDebugConfiguration(folder: WorkspaceFolder | undefined, config: DebugConfiguration, token?: CancellationToken): ProviderResult<DebugConfiguration> {
 
 		// hand off to the appropriate debugger instead of setting one up here
-		globLaunch(config.map);
+		globLaunch(folder, config.map);
 
 		// cancel this debug session
 		return undefined;
