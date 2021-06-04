@@ -1,70 +1,116 @@
-# auto-debug README
+# Auto Debug
 
-This is the README for your extension "auto-debug". After writing up a brief description, we recommend including the following sections.
+Automatically switches your debugger/launch configuration based on what file you have active. Enables automated language-aware debugging.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Allows you to create a new "auto" debugger that maps glob patterns (which will match to your active file name) and launch configuration names. For example:
 
-For example if there is an image subfolder under your extension project workspace:
+```json
+{
+    "name": "auto",
+    "type": "auto-debug",
+    "request": "launch",
+    "map": {
+        // these are defined by you. Glob patterns for your active file on the left, launch configuration name on the right
+        "tests/*.py": "Python: Test Folder Debug",
+        "*.py": "Python: Current File",
+        "*.cpp": "g++.exe - Build and debug active file",
+        "Makefile": "g++.exe - Build and debug Makefile project"
+    }
+}
+```
 
-\!\[feature X\]\(images/feature-x.png\)
+When the "auto" debug configuration is selected, you'll no longer have to manually switch between debug configurations. Just run "auto" using F5 when the code you want to debug is open in an active tab. Auto Debug will then find the best debugger for your situation and run it. Letting you easily automate debugging for yourself, or make sure your developers never have to guess or read documentation to learn what the appropriate debugger configuration is for a particular situation.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Note that in cases where multiple matches are found for your active file, the first match in your "map" settings will be selected.
 
-## Requirements
+## Quick start
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+-   **Step 1.** Install the Auto Debug extension for Visual Studio Code.
 
-## Extension Settings
+-   **Step 2.** Create an "Auto Debug" configuration.
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+![create configuration](images\create_configuration.png)
 
-For example:
+-   **Step 2.** Customize the "Auto Debug" configuration for your needs.
 
-This extension contributes the following settings:
+![edit configuration](images\fill_out_configuration.png)
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+-   **Step 3.** Ensure you have "auto" selected in vscode's "Run and Debug" menu.
+
+![edit configuration](images\select_auto.png)
+
+-   **Step 4.** Open a file you'd like to debug and press F5.
+
+To stop using the automatic matching, simply go back to selecting debug profiles manually.
+
+## Verbose Example
+
+Here is an example **launch.json** file which lets the user switch between python tests, python scripts, and C++ automatically:
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "auto",
+            "type": "auto-debug",
+            "request": "launch",
+            "map": {
+                "test_*.py": "Python: Test File",
+                "*.py": "Python: Current File",
+                "*.cpp": "g++.exe - Build and debug active file"
+            }
+        },
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: Test File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "env": {
+                "RUNNING_TEST": "true"
+            },
+        },
+        {
+            "name": "g++.exe - Build and debug active file",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\msys64\\mingw64\\bin\\gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "C/C++: g++.exe build active file"
+        }
+    ]
+}
+```
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+None.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Initial release of Auto Debug
