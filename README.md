@@ -28,6 +28,8 @@ Note that in cases where multiple matches are found for your active file, the fi
 
 -   **Step 1.** Install the Auto Debug extension for Visual Studio Code.
 
+Marketplace link: [https://marketplace.visualstudio.com/items?itemName=DarrenLevine.auto-debug](https://marketplace.visualstudio.com/items?itemName=DarrenLevine.auto-debug)
+
 -   **Step 2.** Create an "Auto Debug" configuration.
 
 ![create configuration](images/create_configuration.png)
