@@ -1,0 +1,33 @@
+{
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "auto",
+                "type": "auto-debug",
+                "request": "launch",
+                "map": {
+                    "test_*.py": "Python: Test File",
+                    "*.py": "Python: Current File"
+                }
+            },
+            {
+                "name": "Python: Current File",
+                "type": "python",
+                "request": "launch",
+                "program": "${file}",
+                "console": "integratedTerminal"
+            },
+            {
+                "name": "Python: Test File",
+                "type": "python",
+                "request": "launch",
+                "program": "${file}",
+                "console": "integratedTerminal",
+                "env": {
+                    "RUNNING_TEST": "true"
+                },
+            }
+        ]
+    }
+}

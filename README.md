@@ -112,6 +112,10 @@ None.
 
 ## Release Notes
 
+### 1.0.2
+
+- Updated for vscode 1.70.0 compatibility
+
 ### 1.0.1
 
 - Added support for ctrl-F5 (noDebug option)
